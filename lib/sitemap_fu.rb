@@ -21,13 +21,13 @@ module Queso
         def ping_all_search_engines
           return true
           ensure
-            ping_search_engine(google.com)
+            ping_search_engine
         end
         
-        def ping_search_engine(url)
+        def ping_search_engine
           if location = SitemapSetting.find(:first).xml_location
-            response = open("http://#{url}//ping?sitemap=#{location}")
-            logger.info("Just tried to ping #{url} with a sitemap update.")
+            response = open("http://www.google.com/webmasters/sitemaps/ping?sitemap=#{location}")
+            response = open("http://webmaster.live.com/ping.aspx?siteMap=#{location}")
           end
         end
         
