@@ -26,8 +26,13 @@ module Queso
         
         def ping_search_engine
           if location = SitemapSetting.find(:first).xml_location
-            response = open("http://www.google.com/webmasters/sitemaps/ping?sitemap=#{location}")
-            response = open("http://webmaster.live.com/ping.aspx?siteMap=#{location}")
+            begin
+              response = open("http://www.google.com/webmasters/sitemaps/ping?sitemap=#{location}")
+              response = open("http://webmaster.live.com/ping.aspx?siteMap=#{location}")
+              response = open("http://www.bing.com/webmaster/ping.aspx?siteMap=#{location}")
+            rescue
+              # ignore any errors
+            end
           end
         end
         
